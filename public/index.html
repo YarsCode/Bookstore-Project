@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Yaron's Bookstore</title>
+</head>
+<body>
+    <div class = "page">
+        <div class="header">
+            <button id="home">Home</button>
+            <h1>Welcome to Yaron's Bookstore</h1>
+            
+            <div class="header-right">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/19-ecommerce-shopping/shopping-cart.png" id="cart">
+                <button id="login">Login</button>
+                <button id="sign-up">Sign up</button>
+            </div>  
+        </div>
+
+        <div class="modal">
+            <div class="modal-content">
+                <h1>Login</h1>
+                <form>
+                    <p>
+                        <label for="email">Email:</label><br>
+                        <input type="text" id="email" name="email" placeholder="Enter your email"><br>
+                    </p>
+                    <p>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password" placeholder="Enter your password"><br><br>
+                    </p>                    
+                    <input type="submit" value="Submit">
+                    <p>
+                        <button id="close-modal" class="close-modal">Close</button>
+                    </p>                    
+                </form>
+                
+            </div>
+            
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <h1>Sign Up</h1>
+                <form>
+                    <p>
+                        <label for="fname">First Name:</label><br>
+                        <input type="text" id="fname" name="fname" placeholder="First Name"><br>
+                    </p>
+                    <p>
+                        <label for="lname">Last Name:</label><br>
+                        <input type="text" id="lname" name="lname" placeholder="Last Name"><br>
+                    </p>
+                    <p>
+                        <label for="email">Email:</label><br>
+                        <input type="text" id="email" name="email" placeholder="Enter your email"><br>
+                    </p>
+                    <p>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+                    </p>                    
+                    <p>
+                        <label for="password-confirmation">Password Confirmation:</label><br>
+                        <input type="password" id="password-confirmation" name="password-confirmation" placeholder="Confirm your password"><br><br>
+                    </p>                    
+                    <p>
+                        <p>
+                            Admin?
+                        </p>
+                        <input type="radio" id="yes" name="isAdmin" value="Yes">
+                        <label for="yes">Yes</label><br>
+                        <input type="radio" id="no" name="isAdmin" value="No">
+                        <label for="no">No</label><br>
+                    </p>                    
+                    <input type="submit" value="Submit">
+                    <p>
+                        <button id="close-modal" class="close-modal">Close</button>
+                    </p>                    
+                </form>
+                
+            </div>
+            
+        </div>
+
+        <div class="books">
+            
+        </div>
+    </div>
+    
+
+
+
+    <script src="./main.js"></script>
+</body>
+</html>
