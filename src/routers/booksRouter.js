@@ -5,7 +5,10 @@ const Book = require("../models/bookModel")
 const router = new express.Router();
 
 router.post('/books/new', auth, adminAuth, async (req, res) => {
-    const book = new Book(req.body);
+    const book = new Book({
+        ...req.body,
+        user: req.user._id
+    });
     try {
         await book.save();
         res.send(book);

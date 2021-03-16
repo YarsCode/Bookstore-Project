@@ -1,62 +1,52 @@
 .page {
-    /* box-sizing: border-box; */
     display: grid;
-    grid-template-areas:
-    'home text text text text cart login signup'
-    'books';
 }
 .header {
-    /* grid-template-columns: 1fr 1fr 1fr; */
-    width: 75vw;
-    /* min-height: 20vh; */
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    width: 90vw;
+    height: 8vh;
+    margin: auto;
     margin-top: 1vw;
-    background: #e9edc9;
-    border-top: 2px outset brown;
-    border-bottom: 2px outset brown;
-    
-    
+    background: deepskyblue;
+    border-top: 2px solid rgb(167, 243, 239);
+    border-bottom: 2px solid rgb(167, 243, 239);
 }
 .header h1 {
-    grid-area: text;
-    margin-left: 30%;
-    margin-right: 30%;
-    text-align: center;
+    color: azure;
+    margin: auto;
     font-weight: bold;
     font-size: 28px;
-    /* position: absolute; */
-    margin-top: -2%;
+    /* margin-top: -2%; */
     /* margin-left: 24%; */
     
 }
 .header button {
-    grid-area: home;
     border: none;
     outline: none;
+    align-self: center;
     font-size: 1.5rem;
+    font-weight: bold;
     padding: 10px;
     color: black;
-    background: #ccd5ae;
+    background: azure;
     border-radius: 8%;
-    color: #9c6644;
-    margin: 0.7rem;
+    color: rgba(0, 0, 0, 0.63);
+    /* margin: 2%; */
+    align-items: flex-end;
+    /* margin: 0.7rem; */
 }
 .header #cart {
-    position: absolute;
     max-width: 42px;
-    margin-top: 1.2%;
-    margin-left: -4%;
+    /* margin-top: 30%; */
+    /* margin-left: -4%; */
     /* margin: 10%; */
 }
 .header-right {
-    grid-area: cart;
-    float: right;
-    /* margin-top: -6%; */
-    /* position: absolute; */
+    /* margin: auto; */
+    align-self: center;
 }
 .header button:hover {
-    background-color: rgb(202, 149, 149);
+    background-color: rgba(231, 248, 132, 0.76);
     color: black;
 }
 .header button:focus {
@@ -79,10 +69,12 @@
     align-items: center;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
-    background: #bba183;
+    background: #8678c5f3;
+    color: azure;
+    border-radius: 13%;
     margin: auto;
     padding: 30px;
     text-align: center;

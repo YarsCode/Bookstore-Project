@@ -78,6 +78,30 @@ router.patch('/users/edit', auth, async (req, res) => {
     }
 })
 
+router.patch('/users/edit-cart', auth, async (req, res) => {
+    for (let prop in req.body) {
+        if (prop !== "booksAtCart") {
+            return res.status(400).send({
+                status:400,
+                message: "Only changes in the 'booksAtCart' are allowed!"
+            })
+        }
+    }
+    try {
+        for (let change in req.body) {
+            req.user[change] = req.body[change]
+        }
+        
+        await req.user.save()
+        res.send(req.user)    
+    } catch (err) {
+        res.status(400).send({
+            status: 400,
+            message: err.message
+        })
+    }    
+})
+
 router.get('/users/search', async(req, res) => {
     if (doesPropertiesMatch(req, res) !== true)
         return
@@ -145,15 +169,12 @@ router.delete('/users/delete', auth, adminAuth, async(req, res) => {
     }
 });
 
-
-
-
 const doesPropertiesMatch = (req, res) => {
     const allowedProperties = ["firstName", "lastName", "email", "password", "isAdmin"]
     for (let prop in req.body) {
         if(!allowedProperties.includes(prop)) {
-            return res.status(400).send({
-                    status: 400,
+            return res.status(404).send({
+                    status: 404,
                     message: `Unable to find ${prop}`
                 })
         }

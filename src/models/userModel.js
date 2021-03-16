@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    booksAtCart: [
+        {
+            bookID: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Book",
+            },
+        },
+    ],
     tokens: [
         {
             token: {
