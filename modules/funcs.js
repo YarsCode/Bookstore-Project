@@ -183,9 +183,10 @@ function getBook (bookID) {
         return res;
     })
 }
-function editCart (user, book, data) {
+async function editCart (user, data) {
+    // debugger
     // return getBook(book._id).then((res) => {
-        fetch ("http://localhost:3000/users/edit-cart", {
+        await fetch ("http://localhost:3000/users/edit-cart", {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -220,14 +221,13 @@ async function refreshCart (user, cartModal) {
             const deleteFromCart = document.createElement('button')
             deleteFromCart.addEventListener('click', async (e) => {
                 e.stopPropagation();
-                user = await getUser();
+                // user = await getUser();
                 // debugger
                 const data = {
                     booksAtCart: []
                 };
                 if (user.booksAtCart.length > 0) {
                     for (let book2 in user.booksAtCart) {
-                        console.log(user.booksAtCart[book2].bookID, currentBook._id);
                         if (user.booksAtCart[book2].bookID !== currentBook._id) {
                             data.booksAtCart.push({bookID: user.booksAtCart[book2].bookID})
                         }
@@ -235,14 +235,9 @@ async function refreshCart (user, cartModal) {
                     totalPrice -= currentBook.price;
                     cartContent.lastChild.innerHTML = "Total Price: " + totalPrice;
                 }
-                // debugger
-                // console.log(user.booksAtCart.length);
-                // console.log(user.booksAtCart);
-                editCart(user, currentBook, data)
+                await editCart(user, data)
                 user = await getUser();
                 div.remove();
-                // console.log(user.booksAtCart.length);
-                // console.log(user.booksAtCart);
                 if (user.booksAtCart.length === 0) {
                     checkoutButton.classList.add("none");
                     cartContent.lastChild.remove();
@@ -276,6 +271,15 @@ async function refreshCart (user, cartModal) {
         cartModal.children[0].children[1].classList.remove("none");
     }
 }
+async function getBooks () {
+    return await fetch (`http://localhost:3000/books/get-all`)
+    .then((result) => {
+        return result.json()
+    })
+    .then ((res) => {
+        return res;
+    })
+}
 
 
-export {getUser, userLogOut, userLogOutAll, addNewBook, deleteBook, doesPassMatches, displayErrorMsg, isSignupFormLegal, editCart, editBook, getBook, refreshCart};
+export {getUser, userLogOut, userLogOutAll, addNewBook, deleteBook, doesPassMatches, displayErrorMsg, isSignupFormLegal, editCart, editBook, getBook, refreshCart, getBooks};

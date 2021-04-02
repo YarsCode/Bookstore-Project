@@ -5,7 +5,7 @@ const logOut = document.getElementById("logout");
 const addBook = document.getElementById("add-book");
 const editBookButton = document.getElementById('edit-button');
 const deleteBookButton = document.getElementById('delete-book');
-const editCartButton = document.getElementById('add-to-cart');
+const addToCartButton = document.getElementById('add-to-cart');
 const applyChanges = document.getElementById('apply-changes');
 const checkoutButton = document.getElementById('checkout-button');
 const loginForm = document.getElementById("login-form");
@@ -20,8 +20,9 @@ const closeModal = document.getElementsByClassName('close-modal');
 const booksContainer = document.getElementById('books');
 const cartButton = document.getElementById('cart');
 const cartModal = document.getElementsByClassName('modal')[4];
+const search = document.getElementById("search")
 let selectedBook;
-import {getUser, userLogOut, userLogOutAll, addNewBook, deleteBook, doesPassMatches, displayErrorMsg, isSignupFormLegal, editCart, editBook, getBook, refreshCart} from "../modules/funcs.js";
+import {getUser, userLogOut, userLogOutAll, addNewBook, deleteBook, doesPassMatches, displayErrorMsg, isSignupFormLegal, editCart, editBook, getBook, refreshCart, getBooks} from "../modules/funcs.js";
 
 let loggedUser;
 
@@ -46,28 +47,12 @@ window.addEventListener('load', () => {
         else {
             addBook.classList.add("none")
             editBookButton.style.display = "none"
-            editCartButton.style.display = "none"
+            addToCartButton.style.display = "none"
             deleteBookButton.style.display = "none"
         }
     })
 })
 
-// window.addEventListener('beforeunload', (e) => {
-//     e.preventDefault();
-//     userLogOutAll(loggedUser);
-// })
-
-// const turnLoggedInMode = () => {
-//     getUser().then((user) => {
-//         if (user) {
-//             login.style.display = "none"
-//             signUp.style.display = "none"
-//             logOut.style.display = "flex"
-//             cart.style.display = "flex"
-//             document.getElementById('welcome-message').innerHTML = "Welcome back " + user[0].firstName + "!";
-//         }
-//     })
-// }
 home.addEventListener('click', () => { // Returns to homepage
     window.location = "./index.html";
 })
@@ -118,63 +103,52 @@ logOut.addEventListener('click', () => {
     signUp.style.display = "flex"
     userLogOut(loggedUser);
 })
-const displayBooks = async (req, res) => {
-    const response = await fetch("http://localhost:3000/books/get-all")
-    const books = await response.json();
-    return books;
-    // console.log(response.json());
-    // .then((result) => {
-    //     return result.json()
-    // })
-    // .then ((booksAtCart) => {
-    //     getBook(event.target.id).then((book) => {
-    //         selectedBook = {...book};
-    //         console.log(selectedBook);
-    //     })
-    // })
-    // .then ((books) => {
-    //     for (let book in books) {
-    //         const booksModalContent = document.getElementById('books-modal-content');
-    //         const img = document.createElement('img');
-    //         img.src = books[book].imageURL;
-    //         if (img.src.includes("http://127.0.0.1:5500/Projects/Bookstore-Project/public/"))
-    //             img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
-    //         img.setAttribute("id", `${books[book]._id}`)
-    //         booksContainer.appendChild(img);
-    //         img.addEventListener('click', (event) => {
-    //             // debugger
-    //             // bookEditForm.style.display = "none";
-    //             editCartButton.classList.remove("none");
-    //             editBookButton.classList.remove("none");
-    //             deleteBookButton.classList.remove("none");
-    //             const bookDetails = document.getElementById('book-details')
-    //             if (bookDetails) {
-    //                 bookDetails.remove();
-    //             }
-    //             bookEditForm.classList.add("none")
-    //             // getBook(event.target.id).then((book) => {
-    //             //     selectedBook = {...book};
-    //             //     console.log(selectedBook);
-    //             // })
-    //             // selectedBook = event.target.id;
-    //             console.log(selectedBook);
-    //             bookInfoModal.style.display = "flex";
-    //             document.getElementsByClassName('modal-content')[2].style.width = "30%";
-    //             // while (booksModalContent.children.length > 3) {
-    //             //     // console.log(booksModalContent.firstChild.nodeName);
-    //             //     if (booksModalContent.firstChild.nodeName !== 'BUTTON')
-    //             //         booksModalContent.removeChild(booksModalContent.firstChild);
-    //             // }
-    //             const h2 = document.createElement('h2');
-    //             booksModalContent.prepend(h2)
-    //             h2.setAttribute("id", "book-details")
-    //             h2.innerHTML = `<p> Name: ${books[book].name} </p> <p> Author: ${books[book].author} </p> <p> Genre: ${books[book].genre} </p> <p> Summary: ${books[book].summary} </p> <p> Price: ${books[book].price} </p>`;
-    //         })
-    //     }        
-    // }).catch((error) => {
-    //     // alert(error)
-    // })
+const displayBooks = async (books) => {
+    if (!books)
+        books = await getBooks();
+    for (let book in books) {
+        // debugger
+        const booksModalContent = document.getElementById('books-modal-content');
+        const img = document.createElement('img');
+        img.src = books[book].imageURL;
+        if (img.src.includes("http://127.0.0.1:5500/Projects/Bookstore-Project/public/"))
+        img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
+        img.setAttribute("id", `${books[book]._id}`)
+        booksContainer.appendChild(img);
+        img.addEventListener('click', (event) => {
+            let alreadyInCart = document.getElementById("already-in-cart");
+            if (alreadyInCart)
+                 alreadyInCart.remove();
+            // debugger
+            // bookEditForm.style.display = "none";
+            addToCartButton.classList.remove("none");
+            editBookButton.classList.remove("none");
+            deleteBookButton.classList.remove("none");
+            const bookDetails = document.getElementById('book-details')
+            if (bookDetails) {
+                bookDetails.remove();
+            }
+            bookEditForm.classList.add("none")
+            // getBook(event.target.id).then((book) => {
+            //     selectedBook = {...book};
+            //     console.log(selectedBook);
+            // })
+            selectedBook = books.filter(book => book.imageURL === event.target.src)[0];
+            bookInfoModal.style.display = "flex";
+            document.getElementsByClassName('modal-content')[2].style.width = "30%";
+            // while (booksModalContent.children.length > 3) {
+            //     // console.log(booksModalContent.firstChild.nodeName);
+            //     if (booksModalContent.firstChild.nodeName !== 'BUTTON')
+            //         booksModalContent.removeChild(booksModalContent.firstChild);
+            // }
+            const h2 = document.createElement('h2');
+            booksModalContent.prepend(h2)
+            h2.setAttribute("id", "book-details")
+            h2.innerHTML = `<p> Name: ${books[book].name} </p> <p> Author: ${books[book].author} </p> <p> Genre: ${books[book].genre} </p> <p> Summary: ${books[book].summary} </p> <p> Price: ${books[book].price} </p>`;
+        })
+    }
 }
+displayBooks().then();
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
         const data = {
@@ -244,63 +218,18 @@ signUpForm.addEventListener('submit', (e) => {
       });
 });
 
-
-
-// displayModals();
-displayBooks().then ((books) => {
-    for (let book in books) {
-        // debugger
-        const booksModalContent = document.getElementById('books-modal-content');
-        const img = document.createElement('img');
-        img.src = books[book].imageURL;
-        if (img.src.includes("http://127.0.0.1:5500/Projects/Bookstore-Project/public/"))
-        img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
-        img.setAttribute("id", `${books[book]._id}`)
-        booksContainer.appendChild(img);
-        img.addEventListener('click', (event) => {
-            let alreadyInCart = document.getElementById("already-in-cart");
-            if (alreadyInCart)
-                 alreadyInCart.remove();
-            // debugger
-            // bookEditForm.style.display = "none";
-            editCartButton.classList.remove("none");
-            editBookButton.classList.remove("none");
-            deleteBookButton.classList.remove("none");
-            const bookDetails = document.getElementById('book-details')
-            if (bookDetails) {
-                bookDetails.remove();
-            }
-            bookEditForm.classList.add("none")
-            // getBook(event.target.id).then((book) => {
-            //     selectedBook = {...book};
-            //     console.log(selectedBook);
-            // })
-            selectedBook = books.filter(book => book.imageURL === event.target.src)[0];
-            bookInfoModal.style.display = "flex";
-            document.getElementsByClassName('modal-content')[2].style.width = "30%";
-            // while (booksModalContent.children.length > 3) {
-            //     // console.log(booksModalContent.firstChild.nodeName);
-            //     if (booksModalContent.firstChild.nodeName !== 'BUTTON')
-            //         booksModalContent.removeChild(booksModalContent.firstChild);
-            // }
-            const h2 = document.createElement('h2');
-            booksModalContent.prepend(h2)
-            h2.setAttribute("id", "book-details")
-            h2.innerHTML = `<p> Name: ${books[book].name} </p> <p> Author: ${books[book].author} </p> <p> Genre: ${books[book].genre} </p> <p> Summary: ${books[book].summary} </p> <p> Price: ${books[book].price} </p>`;
-        })
-    }
-});
-
 editBookButton.addEventListener('click', () => {
     const bookDetails = document.getElementById('book-details')
     bookDetails.textContent = "";
-    editCartButton.classList.add("none");
+    addToCartButton.classList.add("none");
     editBookButton.classList.add("none");
     deleteBookButton.classList.add("none");
     bookEditForm.classList.remove("none");
 })
 bookEditForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!bookEditForm.imgURL.value.includes(".jpg", ".png"))
+        bookEditForm.imgURL.value = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
     const data = {
         "imageURL": bookEditForm.imgURL.value,
         "name": bookEditForm.name.value,
@@ -310,7 +239,7 @@ bookEditForm.addEventListener('submit', (e) => {
         "price": parseInt(bookEditForm.price.value)
     }
     for (let i in data) {
-        if (data[i] === "")
+        if (data[i] === "" || !data[i])
             delete data[i];
     }
     editBook(loggedUser, selectedBook._id, data);
@@ -333,7 +262,7 @@ addBookForm.addEventListener('submit', (e) => {
 deleteBookButton.addEventListener('click', (e) => {
     deleteBook(loggedUser, selectedBook._id);
 })
-editCartButton.addEventListener('click', async (e) => {
+addToCartButton.addEventListener('click', async (e) => {
     const data = {
         booksAtCart: []
     }
@@ -345,7 +274,7 @@ editCartButton.addEventListener('click', async (e) => {
                 throw new Error();
             data.booksAtCart.push({bookID: user.booksAtCart[book].bookID})
         }
-        await editCart(loggedUser, selectedBook, data)
+        await editCart(user, data)
         location.reload();
     } catch (err) {
         const booksModalContent = document.getElementById('books-modal-content');
@@ -359,67 +288,12 @@ editCartButton.addEventListener('click', async (e) => {
     }
 })
 cartButton.addEventListener('click', async (e) => {
-    // let totalPrice = 0;
-    // cartModal.style.display = "flex";
-    // // cartModal.children[0].style.width = "50%";
-    // cartModal.children[0].style.minWidth = "50%";
-    // const cartContent = document.getElementById('cart-content');
-    // cartContent.textContent = "";
-    // // cartContent.textContent = ""
     e.stopPropagation();
     // console.log(cartModal.children[0]);
     const user = await getUser();
     refreshCart(user, cartModal);
-    // // console.log(user.booksAtCart);
-    // if (user.booksAtCart.length > 0) {
-    //     for (let book in user.booksAtCart) {
-    //         // console.log(user.booksAtCart[book].bookID);
-    //         // debugger
-    //         const currentBook = await getBook(user.booksAtCart[book].bookID)
-    //         totalPrice += currentBook.price;
-    //         const img = document.createElement('img');
-    //         const div = document.createElement('div');
-    //         const infoDiv = document.createElement('div');
-    //         const deleteFromCart = document.createElement('button')
-    //         // deleteFromCart.addEventListener('click', () => {
-                
-    //         // })
-    //         deleteFromCart.setAttribute("id", "delete-from-cart-button")
-    //         deleteFromCart.innerHTML = "Delete"
-    //         img.src = currentBook.imageURL;
-    //         img.style.width = '100px';
-    //         // img.style.height = '162px';
-    //         img.style.float = "left";
-    //         cartContent.appendChild(div)
-    //         // div.style.border = "1px azure solid"
-    //         div.style.borderTop = "3px #f11a7441 outset";
-    //         div.style.borderBottom = "1px #46f5d8b9 inset";
-    //         div.style.borderLeft = "2px #ffd6fd outset";
-    //         div.style.padding = "2rem"
-    //         div.style.borderRadius = "4em"
-    //         // div.style.boxShadow = "12px 12px rgba(108, 70, 143, 0.15)";
-    //         div.style.margin = "1rem"
-    //         div.appendChild(img);
-    //         div.appendChild(infoDiv);
-    //         div.appendChild(deleteFromCart);
-    //         deleteFromCart.style.marginBottom = "1em"
-    //         // infoDiv.style.float = "right"
-    //         infoDiv.innerHTML = `<p> Name: ${currentBook.name} </p> <p> Price: ${currentBook.price} </p> <br> <br>`;
-    //         // cartContent.innerHTML = `<p> Name: ${currentBook.name} </p> <p> Author: ${currentBook.author} </p> <p> Genre: ${currentBook.genre} </p> <p> Summary: ${currentBook.summary} </p> <p> Price: ${currentBook.price} </p>`;
-    //     }
-    //     const p = document.createElement('p');
-    //     cartContent.appendChild(p);
-    //     p.style.paddingTop = "1rem";
-    //     p.innerHTML = "Total Price: " + totalPrice;
-
-    // }
-    // getUser().then((res) => {
-        // const bookID = res[0].bookAtCart[0];
-        // console.log(res[0].booksAtCart);
-        // getBook(res.)
-    // })
 })
-checkoutButton.addEventListener('click', () => {
+checkoutButton.addEventListener('click', async () => {
     const cartContent = document.getElementById('cart-content');
     cartContent.textContent = "";
     const h2 = document.createElement('h2');
@@ -427,5 +301,41 @@ checkoutButton.addEventListener('click', () => {
     h2.innerHTML = "Purchase Successful!";
     h2.style.color = "green"
     document.getElementById('checkout-button').classList.add("none")
-    // cartModal.style.display = "none";
+    const user = await getUser();
+    const data = {
+        booksAtCart: []
+    };
+    editCart(user, data);
+})
+search.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    // debugger
+    const clearBooks = () => {
+        for (let i = booksContainer.children.length - 1; i > 0; i--) {
+            // debugger
+            // console.log(booksContainer.children[i]);
+            if (booksContainer.children[i].nodeName === 'IMG')
+                booksContainer.children[i].remove();
+            else break;
+        }
+    }
+    if (booksContainer.contains(document.getElementById("no-results-found")))
+        document.getElementById("no-results-found").remove();
+    if (search.search.value.length > 0) {
+        let books = await getBooks();        
+        clearBooks();
+        books = books.filter(value => value.name.toLowerCase().includes(search.search.value.toLowerCase()))
+        if (books.length === 0) {
+            const h1 = document.createElement('h1');
+            booksContainer.appendChild(h1);
+            h1.setAttribute('id', 'no-results-found')
+            h1.innerHTML = "No results found.";
+            h1.style.color = "red";
+        }
+        displayBooks(books)
+    }
+    else {
+        clearBooks();
+        displayBooks();
+    }
 })
