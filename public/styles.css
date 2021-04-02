@@ -1,5 +1,9 @@
+body {
+    background: linear-gradient(84.06deg, #fce6e667 -28.62%, #a8e5ff79 66.39%, #42e2f736 98.74%);
+    font-family: 'Josefin Sans', sans-serif;
+}
 .page {
-    display: grid;
+    display: grid;    
 }
 .header {
     display: flex;
@@ -7,59 +11,70 @@
     height: 8vh;
     margin: auto;
     margin-top: 1vw;
-    background: deepskyblue;
-    border-top: 2px solid rgb(167, 243, 239);
-    border-bottom: 2px solid rgb(167, 243, 239);
+    background: linear-gradient(84.06deg, #15abd1 -28.62%, #70b1fc 66.39%, #00abd6 98.74%);
+    border-top: 1px solid rgba(68, 255, 246, 0.342);
+    border-bottom: 1px solid rgba(68, 255, 246, 0.342);
+    border-radius: 0.3em;
+    padding: 0.5rem;
 }
 .header h1 {
     color: azure;
     margin: auto;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 32px;
     /* margin-top: -2%; */
     /* margin-left: 24%; */
     
 }
-.header button {
+.header button{
     border: none;
     outline: none;
     align-self: center;
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 10px;
+    padding: 0.5rem;
     color: black;
     background: azure;
-    border-radius: 8%;
+    border-radius: 0.4em;
     color: rgba(0, 0, 0, 0.63);
     /* margin: 2%; */
     align-items: flex-end;
     /* margin: 0.7rem; */
 }
 .header #cart {
+    display: none;
     max-width: 42px;
+    float: left;
+    margin-right: 10px;
+    /* align-self: auto; */
+    /* margin: 50% 5% auto; */
     /* margin-top: 30%; */
     /* margin-left: -4%; */
     /* margin: 10%; */
 }
 .header-right {
-    /* margin: auto; */
     align-self: center;
 }
 .header button:hover {
-    background-color: rgba(231, 248, 132, 0.76);
-    color: black;
+    transition: ease-in-out 0.2s;
+    background: linear-gradient(84.06deg, #b0efff -28.62%, #ffbedc 66.39%, #fedaff 98.74%);
+    color: rgb(0, 122, 204);
 }
 .header button:focus {
     box-shadow: 0 0 3pt 3pt rgba(82, 84, 230, 0.527);
 }
-.books {
-    display: grid;
-    border: 5px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 7%;
-    width: 20%;
-    padding: 20% 20% 50%;
+.books-container {
+    display: flex;
+    /* border: 5px solid black; */
+    margin: 5% auto;
+    padding: 10px;
+    align-self: center;
+    /* gap: 5px; */    
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* margin-top: 7%; */
+    /* width: 20%; */
+    /* padding: 20% 20% 50%; */
 }
 .modal {
     display: none;
@@ -72,19 +87,72 @@
     background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
-    background: #8678c5f3;
-    color: azure;
-    border-radius: 13%;
+    background: #8ab7ccf3;
+    color: rgb(63, 57, 85);
+    border-radius: 2em;
+    box-shadow: 20px 20px #0b498f26;
+    transition: all .4s ease;
     margin: auto;
     padding: 30px;
     text-align: center;
-    width: 20%;
-    height: 50%;
+    text-shadow: 2px 2px rgba(247, 247, 247, 0.26);
+    min-width: 20%;
+    min-height: 40%;
+    /* height: 59%; */
+    /* overflow:scroll; */
     font-size: 1.2rem;
 }
+.modal-content:hover {
+    box-shadow: 12px 12px rgba(108, 70, 143, 0.15);
+}
+input {
+    margin: 0.5em;
+    padding: 0.3em;
+    border: none;
+    border-radius: 0.3em;
+}
 .close-modal {
-    margin-top: 40%;
+    margin-top: 30%;
     font-weight: bold;
+}
+#checkout-button {
+    margin-top: 10%;
+    font-weight: bold;
+}
+#logout {
+    display: none;
+    /* float: right; */
+}
+img {
+    width: 200px;
+    border: 3px solid rgba(255, 255, 255, 0);
+}
+#books > img:hover {
+    transition: all .3s ease-in-out;
+    position:inherit;
+    width: 220px;
+    height: 350px;
+}
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+    /* padding: 30px; */
+    margin: 20px;
+}
+.search-button {
+    background: rgb(255, 255, 255);
+    border: deepskyblue solid;
+    outline: none;
+    font-weight: bold;
+    /* border-radius: 2em; */
+    border-width: 3px 5px 5px 3px;
+    border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+    /* transform: rotate(2deg); */
+}
+.search-button:hover {
+    color: deepskyblue;
+    border-width: 3px 4px 4px 3px;
 }
 .none {
     display: none;

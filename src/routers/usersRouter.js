@@ -136,11 +136,20 @@ router.post('/users/logout', auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((tokenDoc) => tokenDoc.token !== req.token);
         await req.user.save()
-        res.send({message:"Successful Logout"});
+        res.send(req.user);
     } catch (err) {
         res.status(500).send(err)
     }
 })
+// router.post('/users/expired-tokens-logout', async (req, res) => {
+//     try {
+//         req.user.tokens = [];
+//         await req.user.save()
+//         res.send(req.user);
+//     } catch (err) {
+//         res.status(500).send(err)
+//     }
+// })
 
 router.post('/users/logout-all', auth, async (req, res) => {
     try {
@@ -152,7 +161,7 @@ router.post('/users/logout-all', auth, async (req, res) => {
     }
 })
 
-router.delete('/users/delete', auth, adminAuth, async(req, res) => {
+router.delete('/users/delete', auth, async(req, res) => {
     const _id = req.query.id; // User to delete
     try {
         // await req.user.remove();
