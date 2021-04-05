@@ -32,19 +32,7 @@ function editUser (user, data) {
         // console.log(err.status);
       });
 }
-// function expiredTokensLogout () {
-//     fetch ("http://localhost:3000/users/expired-tokens-logout", {
-//         method: 'POST'
-//     })
-//     .then((result) => {
-//         return result.json()
-//     })
-//     .then ((res) => {
-//         console.log(res);
-//     })
-// }
 function userLogOut (user) {
-    // debugger
     fetch ("http://localhost:3000/users/logout", {
         method: 'POST',
         headers: {
@@ -58,9 +46,6 @@ function userLogOut (user) {
         if (response.message === "Not authenticated")
             throw new Error();
         location.reload();
-    })
-    .catch ((err) => {
-        // expiredTokensLogout();
     })
 }
 function userLogOutAll (user) {

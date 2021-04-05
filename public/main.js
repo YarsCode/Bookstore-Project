@@ -17,7 +17,7 @@ const signUpModal = document.getElementsByClassName('modal')[1];
 const bookInfoModal = document.getElementsByClassName('modal')[2];
 const addBookModal = document.getElementsByClassName('modal')[3];
 const closeModal = document.getElementsByClassName('close-modal');
-const booksContainer = document.getElementById('books');
+const booksContainer = document.getElementById('books-container');
 const cartButton = document.getElementById('cart');
 const cartModal = document.getElementsByClassName('modal')[4];
 const search = document.getElementById("search")
@@ -114,7 +114,7 @@ const displayBooks = async (books) => {
         if (img.src.includes("http://127.0.0.1:5500/Projects/Bookstore-Project/public/"))
         img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
         img.setAttribute("id", `${books[book]._id}`)
-        booksContainer.appendChild(img);
+        booksContainer.children[0].appendChild(img);
         img.addEventListener('click', (event) => {
             let alreadyInCart = document.getElementById("already-in-cart");
             if (alreadyInCart)
@@ -311,13 +311,7 @@ search.addEventListener('submit', async (e) => {
     e.preventDefault();
     // debugger
     const clearBooks = () => {
-        for (let i = booksContainer.children.length - 1; i > 0; i--) {
-            // debugger
-            // console.log(booksContainer.children[i]);
-            if (booksContainer.children[i].nodeName === 'IMG')
-                booksContainer.children[i].remove();
-            else break;
-        }
+        booksContainer.children[0].textContent = "";
     }
     if (booksContainer.contains(document.getElementById("no-results-found")))
         document.getElementById("no-results-found").remove();

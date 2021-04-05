@@ -87,12 +87,15 @@
         <div class="search-bar-container">
             <form id="search">
                 <label for="search"></label><br>
-                <input type="text" name="search" placeholder="Search..." size="80" style="border: 2px solid rgba(0, 0, 0, 0.281);">
+                <input type="text" name="search" placeholder="Search..." id="search-bar" style="border: 2px solid rgba(0, 0, 0, 0.281);">
                 <input type="submit" value="Search" class="search-button">
             </form>            
         </div>
         
-        <div class="books-container" id="books">
+        <div class="books-container" id="books-container">
+            <div id="books" class="books">
+
+            </div>
             <div class="modal">
                 <div class="modal-content" id="books-modal-content">
                     <form id="book-edit-form" class="none">
