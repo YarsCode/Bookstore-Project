@@ -1,0 +1,208 @@
+body {
+    background: linear-gradient(84.06deg, #fce6e667 -28.62%, #a8e5ff79 66.39%, #42e2f736 98.74%);
+    font-family: 'Josefin Sans', sans-serif;    
+}
+button {
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px;
+    background: azure;
+    border-radius: 0.4em;
+    font-weight: 500;
+}
+button:hover {
+    transition: ease-in-out 0.2s;
+    background: linear-gradient(84.06deg, #b0efff -28.62%, #ffbedc 66.39%, #fedaff 98.74%);
+    color: rgb(0, 122, 204);
+}
+.page {
+    display: grid;    
+}
+.header {
+    display: flex;
+    min-width: 90vw;
+    height: 8vh;
+    margin: auto;
+    margin-top: 1vw;
+    background: linear-gradient(84.06deg, #15abd1 -28.62%, #70b1fc 66.39%, #00abd6 98.74%);
+    border-top: 1px solid rgba(68, 255, 246, 0.342);
+    border-bottom: 1px solid rgba(68, 255, 246, 0.342);
+    border-radius: 0.3em;
+    padding: 0.5rem;
+}
+.header h1 {
+    text-align: center;
+    color: azure;
+    margin: auto;
+    font-weight: bold;
+    font-size: 2.2rem;
+    
+}
+.header button{
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    background: azure;
+    border-radius: 0.4em;
+    color: rgba(0, 0, 0, 0.63);
+    margin: 3px;
+}
+.header #cart {
+    display: none;
+    max-width: 38px;
+    margin: auto;
+    padding: 5px;
+}
+.header-right {
+    display: flex;    
+}
+.header button:hover {
+    transition: ease-in-out 0.2s;
+    background: linear-gradient(84.06deg, #b0efff -28.62%, #ffbedc 66.39%, #fedaff 98.74%);
+    color: rgb(0, 122, 204);
+}
+.header button:focus {
+    box-shadow: 0 0 3pt 3pt rgba(82, 84, 230, 0.527);
+}
+.books-container {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    padding: 10px;
+    margin: auto;
+}
+.books * {
+    margin: 3% 0px 3% 8px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.4);
+    overflow: auto;
+}
+.modal-content {
+    background: #8ab7ccf3;
+    color: rgb(63, 57, 85);
+    border-radius: 2em;
+    box-shadow: 20px 20px #0b498f26;
+    transition: all .4s ease;
+    /* margin: 25% auto 5% auto; */
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+    text-shadow: 2px 2px rgba(247, 247, 247, 0.26);
+    min-width: 20%;
+    min-height: 40%;
+    font-size: 1.2rem;
+}
+.modal-content:hover {
+    box-shadow: 12px 12px rgba(108, 70, 143, 0.15);
+}
+input {
+    margin: 0.5em;
+    padding: 0.3em;
+    border: none;
+    border-radius: 0.3em;
+}
+.close-modal {
+    margin-top: 30%;
+    font-weight: bold;
+}
+#checkout-button {
+    margin-top: 10%;
+    font-weight: bold;
+}
+#logout {
+    display: none;
+}
+img {
+    width: 190px;
+    border: 3px solid rgba(255, 255, 255, 0);
+}
+.books *:hover {
+    transition: all .3s ease-in-out;
+    width: 210px;
+}
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+#search-bar {
+    width: 45vw;
+    padding: 6px;
+}
+.search-button {
+    background: rgb(255, 255, 255);
+    border: deepskyblue solid;
+    outline: none;
+    font-weight: bold;
+    border-width: 3px 5px 5px 3px;
+    border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+}
+.search-button:hover {
+    color: deepskyblue;
+    border-width: 3px 4px 4px 3px;
+}
+.none {
+    display: none;
+}
+@media only screen and (max-width: 900px) {
+    .header button {
+        transition: all .4s ease;
+        font-size: 1.1em;
+        padding: 0.5rem;
+    }
+}
+@media only screen and (max-width: 600px) {
+    body {
+      margin: auto;      
+    }
+    .header {
+        width: 70%;
+        height: auto;
+    }
+    .header h1 {
+        /* margin-left: 15%;         */
+        font-size: 1em;        
+    }
+    .header button {
+        font-size: 0.8em;
+        padding: 0.4rem;
+    }
+    .header-right {
+        font-size: 0.9rem;
+    }
+    .header #cart {
+        width: 1.5rem;
+    }
+    #search-bar {
+        width: 80vw;
+    }
+    .books {
+        margin: auto;
+    }
+    .books:hover {
+        width: auto;
+    }
+    .modal {
+        min-height: auto;
+    }
+    .modal-content {
+        margin: auto;
+        overflow-y: scroll;
+        font-size: 1rem;
+        max-width: 65%;
+        min-width: 60%;
+    }
+    .modal-content img {
+        padding: 10px;
+    }
+  }

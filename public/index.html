@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Yaron's Bookstore</title>
+</head>
+<body>
+    <div class = "page">
+        <div class="header">
+            <button id="home">Home</button>
+            <h1 id="welcome-message">Welcome to Yaron's Bookstore</h1>
+            
+            <div class="header-right">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/19-ecommerce-shopping/shopping-cart.png" id="cart">
+                <button class="none" id="add-book">Add new book</button>
+                <button id="logout">Logout</button>
+                <button id="login">Login</button>
+                <button id="sign-up">Sign up</button>
+            </div>  
+        </div>
+
+        <div class="modal">
+            <div class="modal-content">
+                <h1>Login</h1>
+                <form id="login-form">
+                    <p>
+                        <label for="email">Email:</label><br>
+                        <input type="text" id="login-email" name="email" placeholder="Enter your email" required><br>
+                    </p>
+                    <p>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password" required><br><br>
+                    </p>                    
+                    <input type="submit" value="Submit">                   
+                </form>
+                <button class="close-modal">Close</button>
+                
+            </div>
+            
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <h1>Sign Up</h1>
+                <form id="sign-up-form">
+                    <p>
+                        <label for="fname">First Name:</label><br>
+                        <input type="text" id="fname" name="fname" placeholder="First Name" required><br>
+                    </p>
+                    <p>
+                        <label for="lname">Last Name:</label><br>
+                        <input type="text" id="lname" name="lname" placeholder="Last Name" required><br>
+                    </p>
+                    <p>
+                        <label for="email">Email:</label><br>
+                        <input type="text" id="sign-up-email" name="email" placeholder="Enter your email" required><br>
+                    </p>
+                    <p>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="sign-up-password" name="password" placeholder="Enter your password" required><br>
+                    </p>                    
+                    <p>
+                        <label for="password-confirmation">Password Confirmation:</label><br>
+                        <input type="password" id="passwordConfirmation" name="password-confirmation" placeholder="Confirm your password" required><br><br>
+                    </p>                    
+                    <p>
+                        <p>
+                            Admin?
+                        </p>
+                        <input type="radio" id="yes" name="isAdmin" value="Yes" required>
+                        <label for="yes">Yes</label><br>
+                        <input type="radio" id="no" name="isAdmin" value="No" required>
+                        <label for="no">No</label><br>
+                    </p>                    
+                    <input type="submit" value="Submit">                   
+                </form>
+                <button class="close-modal">Close</button>
+                
+            </div>
+            
+        </div>
+
+        <div class="search-bar-container">
+            <form id="search">
+                <label for="search"></label><br>
+                <input type="text" name="search" placeholder="Search..." id="search-bar" style="border: 2px solid rgba(0, 0, 0, 0.281);">
+                <input type="submit" value="Search" class="search-button">
+            </form>            
+        </div>
+        
+        <div class="books-container" id="books-container">
+            <div id="books" class="books">
+
+            </div>
+            <div class="modal">
+                <div class="modal-content" id="books-modal-content">
+                    <form id="book-edit-form" class="none">
+                        <p>
+                            <label for="book-cover">Cover:</label><br>
+                            <input type="text" id="imgURL" name="book-cover" placeholder="Enter new image link"><br>
+                        </p>
+                        <p>
+                            <label for="book-name">Name:</label><br>
+                            <input type="text" id="name" name="book-name" placeholder="Enter new name"><br>
+                        </p>
+                        <p>
+                            <label for="author">Author:</label><br>
+                            <input type="text" id="author" name="author" placeholder="Enter new author"><br>
+                        </p>
+                        <p>
+                            <label for="genre">Genre:</label><br>
+                            <input type="text" id="genre" name="email" placeholder="Enter new genre"><br>
+                        </p>
+                        <p>
+                            <label for="summary">Summary:</label><br>
+                            <input type="text" id="summary" name="summary" placeholder="Enter new summary"><br>
+                        </p>                    
+                        <p>
+                            <label for="price">Price:</label><br>
+                            <input type="number" id="price" name="price" placeholder="Enter new price"><br><br>
+                        </p>
+                        <input id="apply-changes" type="submit" value="Apply Changes">
+                    </form>
+                    <button id="add-to-cart" class="none">Add to cart</button> <br><br>
+                    <input type="number" id="number-of-books-to-add" class="none" min="1" value="1" size="1"><br><br>
+                    <button id="edit-button" class="none">Edit</button>
+                    <button id="delete-book" class="none">Delete</button>
+                </div>
+            </div>
+            <div class="modal">
+                <div class="modal-content" id="books-modal-content">
+                    <form id="add-book-form">
+                        <p>
+                            <label for="book-cover">Cover:</label><br>
+                            <input type="text" id="newImgURL" name="book-cover" placeholder="Enter image link"><br>
+                        </p>
+                        <p>
+                            <label for="book-name">Name:</label><br>
+                            <input type="text" id="newName" name="book-name" placeholder="Enter name" required><br>
+                        </p>
+                        <p>
+                            <label for="author">Author:</label><br>
+                            <input type="text" id="newAuthor" name="author" placeholder="Enter author" required><br>
+                        </p>
+                        <p>
+                            <label for="genre">Genre:</label><br>
+                            <input type="text" id="newGenre" name="email" placeholder="Enter genre" required><br>
+                        </p>
+                        <p>
+                            <label for="summary">Summary:</label><br>
+                            <input type="text" id="newSummary" name="summary" placeholder="Enter summary" required><br>
+                        </p>                    
+                        <p>
+                            <label for="price">Price:</label><br>
+                            <input type="number" id="newPrice" name="price" placeholder="Enter price" required><br><br>
+                        </p>
+                        <input id="submit-new-book" type="submit" value="Add book">
+                    </form>
+                </div>
+            </div>
+            <div class="modal">
+                <div class="modal-content" id="cart-modal-content">
+                    <div id="cart-content">
+
+                    </div>
+                    <h2 class="none">No items in cart.</h2>
+                    <button id="checkout-button" class="none">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <script src="./main.js" type="module"></script>
+</body>
+</html>
